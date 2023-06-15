@@ -1,4 +1,5 @@
 ---
+
 - name: Create
   hosts: localhost
   connection: local
@@ -10,7 +11,7 @@
       type: image
       mode: pull
       server: https://images.linuxcontainers.org
-      alias: ubuntu/bionic
+      alias: ubuntu/jammy
       protocol: simplestreams
     default_config:
       "security.nesting": "true"
@@ -29,6 +30,7 @@
         type: "{{ item.type | default(omit) }}"
         profiles: "{{ item.profiles | default(omit) }}"
         url: "{{ item.url | default(omit) }}"
+        snap_url: "{{ item.snap_url | default(omit) }}"
         cert_file: "{{ item.cert_file | default(omit) }}"
         key_file: "{{ item.key_file | default(omit) }}"
         trust_password: "{{ item.trust_password | default(omit) }}"

@@ -46,6 +46,7 @@ class LXD(Driver):
         platforms:
           - name: instance
             url: https://127.0.0.1:8443
+            snap_url: unix:/var/snap/lxd/common/lxd/unix.socket
             cert_file: /root/.config/lxc/client.crt
             key_file: /root/.config/lxc/client.key
             trust_password: password
@@ -64,10 +65,11 @@ class LXD(Driver):
                 type: unix-char
             profiles:
               - default
-            force_stop: True|False
+            force_stop: true
             ignore_volatile_options: false
             target: node_name
             type: virtual-machine
+            install_basic_packages: false
 
     Provide a list of files Molecule will preserve, relative to the scenario
     ephemeral directory, after any ``destroy`` subcommand execution.

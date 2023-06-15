@@ -1,4 +1,5 @@
 ---
+
 - name: Prepare
   hosts: all
   gather_facts: false
@@ -27,3 +28,4 @@
       until: not _prepare.failed
       retries: 3
       delay: 10
+      when: molecule_yml.platforms[inventory_hostname].install_basic_packages | default(false) | bool
