@@ -69,6 +69,7 @@ class LXD(Driver):
             ignore_volatile_options: false
             target: node_name
             type: virtual-machine
+            install_basic_packages: false
 
     Provide a list of files Molecule will preserve, relative to the scenario
     ephemeral directory, after any ``destroy`` subcommand execution.
