@@ -13,8 +13,6 @@
       server: https://images.linuxcontainers.org
       alias: ubuntu/jammy
       protocol: simplestreams
-    default_config:
-      "security.nesting": "true"
 
   tasks:
     - name: Create molecule instance(s)
@@ -22,7 +20,7 @@
         name: "{{ item.name }}"
         state: started
         source: "{{ default_source | combine(item.source | default({})) }}"
-        config: "{{ default_config | combine(item.config | default({})) }}"
+        config: "{{ item.config | default({}) }}"
         architecture: "{{ item.architecture | default(omit) }}"
         devices: "{{ item.devices | default(omit) }}"
         ignore_volatile_options: "{{ item.ignore_volatile_options | default(false) }}"
