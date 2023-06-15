@@ -7,7 +7,7 @@
 
 Molecule LXD allows using [LXD](https://linuxcontainers.org/lxd/) to provision containers or virtual machines as test resources for [molecule](https://ansible.readthedocs.io/projects/molecule/).
 
- This project is a maintained fork of [ansible-community/molecule-lxd](https://github.com/ansible-community/molecule-lxd), which was archived on Jan 8, 2023.
+This project is a maintained fork of [ansible-community/molecule-lxd](https://github.com/ansible-community/molecule-lxd), which was archived on January 8, 2023.
 
 ## License
 
