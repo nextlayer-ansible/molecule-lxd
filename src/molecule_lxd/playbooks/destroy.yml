@@ -10,6 +10,7 @@
     - name: Destroy molecule instance(s)
       community.general.lxd_container:
         name: "{{ item.name }}"
+        type: "{{ item.type | default(omit) }}"
         state: absent
         force_stop: "{{ item.force_stop | default(true) }}"
         url: "{{ item.url | default(omit) }}"
