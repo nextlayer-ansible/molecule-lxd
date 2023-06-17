@@ -66,8 +66,8 @@ Example:
 platforms:
     -   name: my-instance
         config:
-            "limits.cpu": 2
-            "security.nesting": true
+            "limits.cpu": "2"
+            "security.nesting": "true"
 ```
 
 ## Devices
