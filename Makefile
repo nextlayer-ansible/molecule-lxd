@@ -8,6 +8,7 @@ help:
 	@echo
 	@echo "  make lint                 run all linters"
 	@echo
+	@echo "  make test                 run all tests. Allows passing arguments to tox."
 	@echo "  make test-py38            run tests with python 3.8"
 	@echo "  make test-py39            run tests with python 3.9"
 	@echo "  make test-py310           run tests with python 3.10"
@@ -24,15 +25,15 @@ $(RUN_VENV_BIN)/activate: setup.cfg tox.ini pyproject.toml
 	. $(RUN_VENV_BIN)/activate && python3 --version
 
 # Allow to pass-through arguments to ansible-playbook
-ifeq (tox,$(firstword $(MAKECMDGOALS)))
+ifeq (test,$(firstword $(MAKECMDGOALS)))
   # use the rest as arguments for "good"
   RUN_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
   # ...and turn them into do-nothing targets
   $(eval $(RUN_ARGS):;@:)
 endif
 
-.PHONY: tox
-tox: $(RUN_VENV_BIN)/activate
+.PHONY: test
+test: $(RUN_VENV_BIN)/activate
 	. $(RUN_VENV_BIN)/activate && tox $(RUN_ARGS)
 
 .PHONY: lint

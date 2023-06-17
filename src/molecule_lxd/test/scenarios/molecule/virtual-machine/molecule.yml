@@ -1,0 +1,41 @@
+---
+
+driver:
+  name: lxd
+
+platforms:
+  - name: instance
+    source_alias: focal
+    groups:
+      - my_group
+    type: virtual-machine
+    config:
+      "limits.cpu": "2"
+      "limits.memory": 2GB
+      "user.user-data": |
+          #cloud-config
+          growpart:
+            mode: auto
+            devices:
+              - '/'
+              - '/dev/sda'
+              - '/dev/sda2'
+            ignore_growroot_disabled: false
+    devices:
+      config:
+        source: cloud-init:config
+        type: disk
+      eth0:
+        nictype: bridged
+        parent: lxdbr0
+        type: nic
+      root:
+        path: /
+        pool: default
+        size: 5GB
+        type: disk
+
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ../default/converge.yml

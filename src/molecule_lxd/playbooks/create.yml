@@ -11,29 +11,47 @@
       type: image
       mode: pull
       server: https://images.linuxcontainers.org
-      alias: ubuntu/jammy
+      alias: ubuntu/jammy/amd64
       protocol: simplestreams
 
   tasks:
+    - name: Print warning for using deprecated var 'alias'
+      debug:
+        msg: "Using 'alias' for instance {{ item.name }} is deprecated. Use 'source_alias' instead."
+      when: item.alias is defined
+      loop: "{{ molecule_yml.platforms }}"
+      loop_control:
+        label: "{{ item.name }}"
+
     - name: Create molecule instance(s)
       community.general.lxd_container:
         name: "{{ item.name }}"
         state: started
-        source: "{{ default_source | combine(item.source | default({})) }}"
-        config: "{{ item.config | default({}) }}"
+        type: "{{ item.type | default(omit) }}"
         architecture: "{{ item.architecture | default(omit) }}"
+        source: >-
+          {{
+            {
+              'type': item.source_type | default(default_source.type),
+              'mode': item.source_mode | default(default_source.mode),
+              'server': item.source_server | default('https://cloud-images.ubuntu.com/releases' if item.type | default('container') == 'virtual-machine' else  default_source.server),
+              'alias': item.alias | default(item.source_alias | default(default_source.alias)),
+              'protocol': item.source_protocol | default(default_source.protocol)
+            } | combine(item.source | default({}))
+          }}
+        profiles: "{{ item.profiles | default(omit) }}"
+        project: "{{ item.project | default(omit) }}"
+        config: "{{ item.config | default({}) }}"
         devices: "{{ item.devices | default(omit) }}"
         ignore_volatile_options: "{{ item.ignore_volatile_options | default(false) }}"
-        target: "{{ item.target | default(omit) }}"
-        type: "{{ item.type | default(omit) }}"
-        profiles: "{{ item.profiles | default(omit) }}"
         url: "{{ item.url | default(omit) }}"
         snap_url: "{{ item.snap_url | default(omit) }}"
+        target: "{{ item.target | default(omit) }}"
         cert_file: "{{ item.cert_file | default(omit) }}"
         key_file: "{{ item.key_file | default(omit) }}"
         trust_password: "{{ item.trust_password | default(omit) }}"
         wait_for_ipv4_addresses: "{{ item.wait_for_ipv4_addresses | default(true) }}"
-        timeout: 600
+        timeout: "{{ item.timeout | default(600) }}"
       loop: "{{ molecule_yml.platforms }}"
       loop_control:
         label: "{{ item.name }}"

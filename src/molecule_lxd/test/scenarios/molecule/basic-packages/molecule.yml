@@ -1,0 +1,13 @@
+---
+
+driver:
+  name: lxd
+
+platforms:
+  - name: instance
+    install_basic_packages: true
+
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ../default/converge.yml

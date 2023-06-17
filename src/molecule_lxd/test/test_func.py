@@ -20,7 +20,10 @@
 #  DEALINGS IN THE SOFTWARE.
 """Functional tests"""
 import pathlib
+import pytest
+import os
 
+from molecule import util
 from molecule.util import run_command
 from molecule.test.conftest import change_dir_to
 
@@ -53,5 +56,36 @@ def test_command_init_scenario(tmp_path: pathlib.Path):
         assert result.returncode == 0
 
         cmd = ["molecule", "--debug", "test", "-s", scenario_name]
+        result = run_command(cmd)
+        assert result.returncode == 0
+
+
+@pytest.mark.parametrize(
+    "scenario",
+    ["default", "basic-packages"],
+)
+def test_container_scenario(tmp_path: pathlib.Path, scenario):
+    scenario_directory = os.path.join(
+        os.path.dirname(util.abs_path(__file__)), "scenarios"
+    )
+
+    with change_dir_to(scenario_directory):
+        cmd = ["molecule", "--debug", "test", "-s", scenario]
+        result = run_command(cmd)
+        assert result.returncode == 0
+
+
+@pytest.mark.parametrize(
+    "scenario",
+    ["virtual-machine"],
+)
+@pytest.mark.skipif(not os.path.exists("/dev/kvm"), reason="requires KVM")
+def test_vm_scenario(tmp_path: pathlib.Path, scenario):
+    scenario_directory = os.path.join(
+        os.path.dirname(util.abs_path(__file__)), "scenarios"
+    )
+
+    with change_dir_to(scenario_directory):
+        cmd = ["molecule", "--debug", "test", "-s", scenario]
         result = run_command(cmd)
         assert result.returncode == 0

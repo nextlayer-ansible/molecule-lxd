@@ -10,6 +10,7 @@
     - name: Destroy molecule instance(s)
       community.general.lxd_container:
         name: "{{ item.name }}"
+        type: "{{ item.type | default(omit) }}"
         state: absent
         force_stop: "{{ item.force_stop | default(true) }}"
         url: "{{ item.url | default(omit) }}"
@@ -18,6 +19,7 @@
         key_file: "{{ item.key_file | default(omit) }}"
         trust_password: "{{ item.trust_password | default(omit) }}"
         ignore_volatile_options: "{{ item.ignore_volatile_options | default(false) }}"
+        timeout: "{{ item.timeout | default(600) }}"
       loop: "{{ molecule_yml.platforms }}"
       loop_control:
         label: "{{ item.name }}"
