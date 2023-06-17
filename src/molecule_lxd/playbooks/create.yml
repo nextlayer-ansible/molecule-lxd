@@ -18,7 +18,7 @@
     - name: Print warning for using deprecated var 'alias'
       debug:
         msg: "Using 'alias' for instance {{ item.name }} is deprecated. Use 'source_alias' instead."
-      when: item.alias | defined
+      when: item.alias is defined
       loop: "{{ molecule_yml.platforms }}"
       loop_control:
         label: "{{ item.name }}"
