@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.5.0] - 2023-06-17
+
+### Added
+
+- Add test scenarios
+- Add documentation and examples
+
+### Changed
+- Use canonical/setup-lxd Github action to set up LXD
+
+### Fixed
+- Hardcoded "security.nesting" key from config in create.yml should be removed (#1)
+- Fix destroy playbook for virtual-machines
+
 ## [v0.4.0a0] - 2022-02-18
 
 ### Changed
