@@ -1,10 +1,11 @@
 # Molecule LXD
 
-*Molecule LXD* is a driver plugin for the Ansible test
+*Molecule LXD* is a driver plugin for the [Ansible](https://docs.ansible.com/ansible/latest/index.html) test
 runner [molecule](https://ansible.readthedocs.io/projects/molecule/) and allows
-using [LXD](https://linuxcontainers.org/lxd/) to provision containers or virtual-machines as test resources. The plugin
-supports local and remote LXD environments, and configures molecule to connect to the test resources using
-the [LXD connection plugin](https://docs.ansible.com/ansible/latest/collections/community/general/lxd_connection.html).
+using [LXD](https://linuxcontainers.org/lxd/) to provision containers or virtual-machines as test resources by using
+the [Ansible LXD container module](https://docs.ansible.com/ansible/latest/collections/community/general/lxd_container_module.html).
+The plugin supports local and remote LXD environments, and configures molecule to connect to the test resources using
+the [Ansible LXD connection plugin](https://docs.ansible.com/ansible/latest/collections/community/general/lxd_connection.html).
 
 ## Topics
 
