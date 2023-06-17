@@ -43,17 +43,17 @@ Example:
 
 ```yaml
 platforms:
-    -   name: my-instance
-        source:
-            alias: ubuntu/bionic/amd64
+  - name: my-instance
+    source:
+      alias: ubuntu/bionic/amd64
 ```
 
 The above example is equal to the following example:
 
 ```yaml
 platforms:
-    -   name: my-instance
-        source_alias: ubuntu/bionic/amd64
+  - name: my-instance
+    source_alias: ubuntu/bionic/amd64
 ```
 
 ## Config
@@ -64,10 +64,10 @@ Example:
 
 ```yaml
 platforms:
-    -   name: my-instance
-        config:
-            "limits.cpu": "2"
-            "security.nesting": "true"
+  - name: my-instance
+    config:
+      "limits.cpu": "2"
+      "security.nesting": "true"
 ```
 
 ## Devices
@@ -78,9 +78,9 @@ Example:
 
 ```yaml
 platforms:
-    -   name: my-instance
-        devices:
-            kvm:
-                path: /dev/kvm
-                type: unix-char
+  - name: my-instance
+    devices:
+      kvm:
+        path: /dev/kvm
+        type: unix-char
 ```

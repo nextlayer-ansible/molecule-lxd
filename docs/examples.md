@@ -20,13 +20,13 @@ driver:
 platforms:
   - name: instance
     groups:
-        - my_group
+      - my_group
     source:
-       alias: ubuntu/jammy/amd64
-       type: image
-       mode: pull
-       server: https://images.linuxcontainers.org
-       protocol: simplestreams
+      alias: ubuntu/jammy/amd64
+      type: image
+      mode: pull
+      server: https://images.linuxcontainers.org
+      protocol: simplestreams
     config:
       security.nesting: "true"
       security.syscalls.intercept.mknod: "true"
@@ -49,14 +49,14 @@ platforms:
       limits.cpu: "2"
       limits.memory: 2GB
       user.user-data: |
-          #cloud-config
-          growpart:
-            mode: auto
-            devices:
-              - '/'
-              - '/dev/sda'
-              - '/dev/sda2'
-            ignore_growroot_disabled: false
+        #cloud-config
+        growpart:
+          mode: auto
+          devices:
+            - '/'
+            - '/dev/sda'
+            - '/dev/sda2'
+          ignore_growroot_disabled: false
     devices:
       config:
         source: cloud-init:config
