@@ -62,13 +62,9 @@ def test_command_init_scenario(tmp_path: pathlib.Path):
 
 @pytest.mark.parametrize(
     "scenario",
-    [
-        ("default"),
-        ("basic-packages")
-    ],
+    ["default", "basic-packages"],
 )
 def test_container_scenario(tmp_path: pathlib.Path, scenario):
-
     scenario_directory = os.path.join(
         os.path.dirname(util.abs_path(__file__)), "scenarios"
     )
@@ -81,14 +77,10 @@ def test_container_scenario(tmp_path: pathlib.Path, scenario):
 
 @pytest.mark.parametrize(
     "scenario",
-    [
-        ("virtual-machine")
-    ],
+    ["virtual-machine"],
 )
-@pytest.mark.skipif(not os.path.exists('/dev/kvm'),
-                    reason="requires KVM")
+@pytest.mark.skipif(not os.path.exists("/dev/kvm"), reason="requires KVM")
 def test_vm_scenario(tmp_path: pathlib.Path, scenario):
-
     scenario_directory = os.path.join(
         os.path.dirname(util.abs_path(__file__)), "scenarios"
     )

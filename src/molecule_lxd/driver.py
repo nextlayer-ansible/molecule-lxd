@@ -55,7 +55,7 @@ class LXD(Driver):
               mode: pull
               server: https://images.linuxcontainers.org
               protocol: lxd|simplestreams
-              alias: ubuntu/xenial/amd64
+              alias: ubuntu/jammy/amd64
             architecture: x86_64|i686
             config:
               limits.cpu: 2
@@ -118,11 +118,11 @@ class LXD(Driver):
         }
 
     def sanity_checks(self):
-        # FIXME(decentral1se): Implement sanity checks
+        # FIXME(decentralize): Implement sanity checks
         pass
 
     def template_dir(self):
-        """Return path to its own cookiecutterm templates. It is used by init
+        """Return path to its own cookiecutter templates. It is used by init
         command in order to figure out where to load the templates from.
         """
         return os.path.join(os.path.dirname(__file__), "cookiecutter")
