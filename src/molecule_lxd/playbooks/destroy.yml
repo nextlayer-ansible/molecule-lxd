@@ -19,6 +19,7 @@
         key_file: "{{ item.key_file | default(omit) }}"
         trust_password: "{{ item.trust_password | default(omit) }}"
         ignore_volatile_options: "{{ item.ignore_volatile_options | default(false) }}"
+        timeout: "{{ item.timeout | default(600) }}"
       loop: "{{ molecule_yml.platforms }}"
       loop_control:
         label: "{{ item.name }}"
