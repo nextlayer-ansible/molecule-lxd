@@ -41,7 +41,7 @@ jobs:
 
     steps:
       - name: Checkout project
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: LXD init
         uses: canonical/setup-lxd@v0.1.1
